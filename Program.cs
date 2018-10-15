@@ -17,15 +17,16 @@ namespace Lab_7
         {
             return Regex.IsMatch(_Phone, @"^\d{3}-\d{3}-\d{4}$");
         }
-        static bool IsDate(string _Date)
+        static bool IsDate(string _Date)    //dd/mm/yyyy
         {
-            if ()
+            return (Regex.IsMatch(_Date, @"^[0123]\d/[01]\d/\d{4}$"));
         }
         static void Main(string[] args)
         {   
             System.Console.WriteLine(IsName("Hello World"));
             System.Console.WriteLine(IsEmail("asdfasdf@asdfa.co"));
             System.Console.WriteLine(IsPhoneNumber("999-999-9999"));
+            System.Console.WriteLine(IsDate("12/12/1234"));
         }
     }
 }
