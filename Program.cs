@@ -39,7 +39,7 @@ namespace Lab_7
                 case 4: case 6: case 9: case 11:
                     return 30;
                 case 2:
-                    return IsLeapYear() ? 29 : 28;
+                    return IsLeapYear(_Year) ? 29 : 28;
                 default:
                     return -1;
             }
