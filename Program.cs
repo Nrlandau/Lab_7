@@ -15,14 +15,17 @@ namespace Lab_7
         }
         static bool IsPhoneNumber(string _Phone)
         {
-            return Regex.IsMatch(_Phone, @"\d{3}-\d{3}-\d{4}");
+            return Regex.IsMatch(_Phone, @"^\d{3}-\d{3}-\d{4}$");
+        }
+        static bool IsDate(string _Date)
+        {
+            if ()
         }
         static void Main(string[] args)
         {   
             System.Console.WriteLine(IsName("Hello World"));
             System.Console.WriteLine(IsEmail("asdfasdf@asdfa.co"));
             System.Console.WriteLine(IsPhoneNumber("999-999-9999"));
-
         }
     }
 }
