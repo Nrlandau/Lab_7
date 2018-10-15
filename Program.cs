@@ -51,6 +51,10 @@ namespace Lab_7
                     return true;
             return false;
         }
+        static bool IsHtml(string _Html)
+        {
+            return Regex.IsMatch(_Html, @"^<(?<name>.*)>.*</\k<name>>$");
+        }
         static void Main(string[] args)
         {   
             System.Console.WriteLine(IsName("Hello World"));
@@ -58,6 +62,9 @@ namespace Lab_7
             System.Console.WriteLine(IsPhoneNumber("999-999-9999"));
             System.Console.WriteLine(IsDate("12/12/1234"));
             System.Console.WriteLine(IsDate("34/12/1234"));
+            System.Console.WriteLine(IsDate("29/02/1999"));
+            System.Console.WriteLine(IsDate("29/02/2000"));
+            System.Console.WriteLine(IsHtml("<h1> asdfasdf/h1 </h1>"));
         }
     }
 }
