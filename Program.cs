@@ -5,13 +5,13 @@ namespace Lab_7
 {
     class Program
     {
-        static bool IsName()
+        static bool IsName(string name)
         {
-            return true;
+            return Regex.IsMatch(name, @"^[A-Z][\w ]{0,29}$");
         }
         static void Main(string[] args)
         {   
-
+            System.Console.WriteLine(IsName("Hello World"));
         }
     }
 }
