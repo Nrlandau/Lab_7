@@ -5,15 +5,15 @@ namespace Lab_7
 {
     class Program
     {
-        static bool IsName(string _name)
+        static bool IsName(string _name) // Must be more than 5 characters and the first one must be uppercase.
         {
             return Regex.IsMatch(_name, @"^[A-Z][\w ]{0,29}$");
         }
-        static bool IsEmail(string _email)
+        static bool IsEmail(string _email)  //5-30 letters,'@',5-10 letters,'.',2-3 letters
         {
             return Regex.IsMatch(_email, @"^[\w\d]{5,30}@[\w\d]{5,10}\.[\w\d]{2,3}$");
         }
-        static bool IsPhoneNumber(string _Phone)
+        static bool IsPhoneNumber(string _Phone) //xxx-xxx-xxxx
         {
             return Regex.IsMatch(_Phone, @"^\d{3}-\d{3}-\d{4}$");
         }
@@ -23,7 +23,7 @@ namespace Lab_7
             if (Regex.IsMatch(_Date, @"^[0123]\d/(0\d|1[012])/\d{4}$"))
             {
                 day = int.Parse(_Date.Substring(0,2));
-                if( day != 0 && day <= GetDaysInMonth(int.Parse(_Date.Substring(3,2)),int.Parse(_Date.Substring(6,4))))
+                if( day != 0 && day <= GetDaysInMonth(int.Parse(_Date.Substring(3,2)),int.Parse(_Date.Substring(6,4)))) //Tests if the day is a valid day for the month.
                 {
                     return true;
                 }
@@ -51,19 +51,29 @@ namespace Lab_7
                     return true;
             return false;
         }
-        static bool IsHtml(string _Html)
+        static bool IsHtml(string _Html) //<*>   junk  </*>
         {
             return Regex.IsMatch(_Html, @"^<(?<element>.+)>.*</\k<element>>$");
         }
+        static string hasN(string name)
+        {
+            switch (name.ToLower()[0])
+            {
+                case 'a': case 'e' : case 'i' : case 'o' : case 'u':
+                return "n";
+                default:
+                return "";
+            }
+        }
         
-        static string GetInputAndTest(string _Question ,string _Wrong,string _Condition, Func<string,bool> test)
+        static string GetInputAndTest(string _Name ,string _Condition, Func<string,bool> test)
         {
             string input;
-            System.Console.WriteLine("{0}, {1}", _Question,_Condition);
+            System.Console.WriteLine("Input a{2} {0}, {1}",_Name,_Condition , hasN(_Name));
             input = System.Console.ReadLine();
             while(!test(input))
             {
-                System.Console.WriteLine("{0}, {1}",_Wrong,_Condition);
+                System.Console.WriteLine("Invalid {0}, {1}",_Name,_Condition);
                 input = System.Console.ReadLine();
             }
             return input;
@@ -72,11 +82,11 @@ namespace Lab_7
         {   
             //while (true)
             {
-                GetInputAndTest("Input a name", "Invalid name","it must start with a capitol letter and be 5 or more letters long", IsName);
-                GetInputAndTest("Input a date", "Invalid date" , "it must be dd/mm/yyyy format",IsDate);
-                GetInputAndTest("Input an email address", "Invalid email address", "it must start with 5-30 letters, '@', 5-10letters, '.', 2,3 letters", IsEmail);
-                GetInputAndTest("Input a phone number", "Invalid phone number", "it must be xxx-xxx-xxxx", IsPhoneNumber);
-                GetInputAndTest("Input Html", "Invalid Html", "<*>asdfasdf</*>", IsHtml);
+                GetInputAndTest("name","it must start with a capital letter and be 5 or more letters long", IsName);
+                GetInputAndTest("date" , "it must be dd/mm/yyyy format",IsDate);
+                GetInputAndTest("email address",  "it must start with 5-30 letters, '@', 5-10letters, '.', 2,3 letters", IsEmail);
+                GetInputAndTest("phone number",  "it must be xxx-xxx-xxxx", IsPhoneNumber);
+                GetInputAndTest("Html Code", "<*>asdfasdf</*>", IsHtml);
             }
         }
     }
