@@ -44,8 +44,11 @@ namespace Lab_7
                     return -1;
             }
         }
-        static bool IsLeapYear()
+        static bool IsLeapYear(int _Year)
         {
+            if( _Year % 4 ==0)
+                if( _Year % 100 != 0 || _Year % 400 == 0)
+                    return true;
             return false;
         }
         static void Main(string[] args)
