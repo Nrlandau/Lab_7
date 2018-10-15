@@ -53,18 +53,31 @@ namespace Lab_7
         }
         static bool IsHtml(string _Html)
         {
-            return Regex.IsMatch(_Html, @"^<(?<name>.*)>.*</\k<name>>$");
+            return Regex.IsMatch(_Html, @"^<(?<element>.+)>.*</\k<element>>$");
+        }
+        
+        static string GetInputAndTest(string _Question ,string _Wrong,string _Condition, Func<string,bool> test)
+        {
+            string input;
+            System.Console.WriteLine("{0}, {1}", _Question,_Condition);
+            input = System.Console.ReadLine();
+            while(!test(input))
+            {
+                System.Console.WriteLine("{0}, {1}",_Wrong,_Condition);
+                input = System.Console.ReadLine();
+            }
+            return input;
         }
         static void Main(string[] args)
         {   
-            System.Console.WriteLine(IsName("Hello World"));
-            System.Console.WriteLine(IsEmail("asdfasdf@asdfa.co"));
-            System.Console.WriteLine(IsPhoneNumber("999-999-9999"));
-            System.Console.WriteLine(IsDate("12/12/1234"));
-            System.Console.WriteLine(IsDate("34/12/1234"));
-            System.Console.WriteLine(IsDate("29/02/1999"));
-            System.Console.WriteLine(IsDate("29/02/2000"));
-            System.Console.WriteLine(IsHtml("<h1> asdfasdf/h1 </h1>"));
+            //while (true)
+            {
+                GetInputAndTest("Input a name", "Invalid name","it must start with a capitol letter and be 5 or more letters long", IsName);
+                GetInputAndTest("Input a date", "Invalid date" , "it must be dd/mm/yyyy format",IsDate);
+                GetInputAndTest("Input an email address", "Invalid email address", "it must start with 5-30 letters, '@', 5-10letters, '.', 2,3 letters", IsEmail);
+                GetInputAndTest("Input a phone number", "Invalid phone number", "it must be xxx-xxx-xxxx", IsPhoneNumber);
+                GetInputAndTest("Input Html", "Invalid Html", "<*>asdfasdf</*>", IsHtml);
+            }
         }
     }
 }
